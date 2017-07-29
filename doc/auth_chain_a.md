@@ -63,7 +63,7 @@ The HMAC input in part 2 is whole data in part 2 except HMAC itself
 
 The "size" is the Payload size, little-endian
 ```
-size is xor with client\_hash or server\_hash last 2 bytes
+size is xor with client\_hash or server\_hash last 2 bytes  
 Random bytes length is genarated by xorshift128plus which init with client\_hash & size if send to server or with server\_hash & size if send to client
 
 Payload encrypted by RC4 method with key Base64(user\_key)+Base64(client\_hash)
