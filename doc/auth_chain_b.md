@@ -26,7 +26,7 @@ auth_chain_b 与 auth_chain_a 最大不同在于重新定义了TCP部分非首�
 其中random为XorShift128Plus快速伪随机数生成器
 
 此函数输入原始数据长度，返回需补全的随机数据长度  
-简单的说，此函数使得算法将原始包随机填充不定长的随机数据，使得填充后的包长度随机分布在(原始包~1440)之间
+简单的说，此函数使得算法将原始包随机填充不定长的随机数据，使得填充后的包长度随机分布在[原始包~1440)之间
 
 
 ### auth_chain_b的新的长度计算函数实现如下  
@@ -83,21 +83,21 @@ auth_chain_b 与 auth_chain_a 最大不同在于重新定义了TCP部分非首�
             self.data_size_list2.append((int)(random.next() % 2340 % 2040 % 1440))
         self.data_size_list2.sort()
 ```
-data_size_list会被初始化为4~11个元素
-data_size_list2会被初始化为8~23个元素
+data_size_list会被初始化为4\~11个元素  
+data_size_list2会被初始化为8\~23个元素  
 
-初始化之后rnd_data_len会先在data_size_list中随机寻找一个可能的填充长度值  
-若寻找失败则在data_size_list2中随机寻找一个可能的填充长度值  
-若仍然寻找失败则不填充
+初始化之后rnd_data_len会先在`[data_size_list中最小可能pos\~data_size_list中最小可能pos+len(data_size_list))`中随机寻找一个可能的填充长度值  
+若寻找失败`(随机选取结果落在data_size_list之外)`则在`[data_size_list2中最小可能pos\~data_size_list2中最小可能pos+len(data_size_list2))`中随机寻找一个可能的填充长度值  
+若仍然寻找失败`(随机选取结果落在data_size_list2之外)`则不填充
 
 因data_size_list与data_size_list2会被用户密码生成的key初始化的伪随机数生成器初始化  
 故使用相同的用户密码会生成一致的data_size_list与data_size_list2  
-此特性即为传说中的`更换密码即更换特征`  
-*猜测：在连接建立时初始化data_size_list与data_size_list2和在服务器启动时初始化data_size_list与data_size_list2的结果没有区别*  
+此特性即为传说中的`更换密码即更换特征(包长度统计特征)`  
+*猜测：在连接建立时初始化data_size_list与data_size_list2和在进程启动时初始化data_size_list与data_size_list2的结果没有区别*  
 *因此可以共用data_size_list与data_size_list2*
 
-但根据代码所显示的，填充后的包长度有一定概率为data_size_list或data_size_list2中的长度，而有一定概率为原始长度  
-因此此算法的填充结果为某些定值或为原始长度  
+但根据代码所显示的，填充后的包长度有一定概率为data_size_list或data_size_list2中的长度，而剩余概率下不填充则为原始长度  
+因此此算法的填充结果为某些由用户密码决定的定值或为原始长度  
 但当用户密码生成的data_size_list序列长度中的填充目标长度均过短时，有更大概率会导致总是不进行填充
 
 
@@ -112,6 +112,7 @@ UDP部分不变
 1. 使得所有包均填充至data_size_list与data_size_list2中的某个大小
 1. 一定无法填充为data_size_list与data_size_list2中的某个大小的包继续使用随机长度填充或0长度填充
 1. 修改data_size_list与data_size_list2的生成算法使其的范围能够容纳所有可能长度的包 **(<==较难实现)**
+1. 优化data_size_list的初始化过程，在进程启动时初始化一个全局版本的data_size_list，使得所有连接共用data_size_list，降低连接创建时的计算复杂度，增强包特征
 
 ### 实现方法
 ```python
