@@ -98,7 +98,13 @@ data_size_list2会被初始化为8\~23个元素
 
 但根据代码所显示的，填充后的包长度有一定概率为data_size_list或data_size_list2中的长度，而剩余概率下不填充则为原始长度  
 因此此算法的填充结果为某些由用户密码决定的定值或为原始长度  
-但当用户密码生成的data_size_list序列长度中的填充目标长度均过短时，有更大概率会导致总是不进行填充
+但当用户密码生成的data_size_list序列长度中的填充目标长度均过短时，有更大概率会导致总是不进行填充 *(此问题需要考察xorshift128plus的分布情况)*  
+
+*假设xorshift128plus均匀分布，则data_size_list与data_size_list2均匀分布*  
+*当buf_size较大时，`pos + random.next() % (len(self.data_size_list2))`更容易导致后续的`if final_pos < len(self.data_size_list2):`为False*  
+*同理`if final_pos < len(self.data_size_list2):`也更容易为False*  
+*故buf_size越大越容易不进行填充*
+
 
 
 ## UDP
