@@ -93,7 +93,7 @@ data_size_list2会被初始化为8\~23个元素
 因data_size_list与data_size_list2会被用户密码生成的key初始化的伪随机数生成器初始化  
 故使用相同的用户密码会生成一致的data_size_list与data_size_list2  
 此特性即为传说中的`更换密码即更换特征(包长度统计特征)`  
-*猜测：在连接建立时初始化data_size_list与data_size_list2和在进程启动时初始化data_size_list与data_size_list2的结果没有区别*  
+*~~猜测：~~在连接建立时初始化data_size_list与data_size_list2和在进程启动时初始化data_size_list与data_size_list2的结果没有区别*  
 *因此可以共用data_size_list与data_size_list2*
 
 但根据代码所显示的，填充后的包长度有一定概率为data_size_list或data_size_list2中的长度，而剩余概率下不填充则为原始长度  
