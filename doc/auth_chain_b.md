@@ -54,7 +54,7 @@ auth_chain_b 与 auth_chain_a 最大不同在于重新定义了TCP部分非首�
         # assert False
 
         if buf_size > 1300:
-            return random.next() % 31
+            return random.next() % 31   # 如果真的跑到这里，就意味着可能发出一个 1439+30+4 大小的包
         if buf_size > 900:
             return random.next() % 127
         if buf_size > 400:
@@ -128,6 +128,9 @@ UDP部分不变
     self.data_size_list0.sort()
 
     def rnd_data_len(self, buf_size, last_hash, random):
+        other_data_size = buf_size + self.server_info.overhead
+        # 一定要在random使用前初始化，以保证服务器与客户端同步，保证包大小验证结果正确
+        random.init_from_bin_len(last_hash, buf_size)
         # final_pos 总是分布在pos~(data_size_list0.len-1)之间
         # 除非data_size_list0中的任何值均过小使其全部都无法容纳buf
         if buf_size >= self.data_size_list0[-1]:
@@ -141,13 +144,12 @@ UDP部分不变
                 return random.next() % 521
             return random.next() % 1021
 
-        random.init_from_bin_len(last_hash, buf_size)
-        pos = bisect.bisect_left(self.data_size_list0, buf_size + self.server_info.overhead)
+        pos = bisect.bisect_left(self.data_size_list0, other_data_size)
         final_pos = pos + random.next() % (len(self.data_size_list0) - pos)
-        return self.data_size_list0[final_pos] - buf_size - self.server_info.overhead
+        return self.data_size_list0[final_pos] - other_data_size
 
 ```
 
 
-*什么时候我弄个auth_chain_c出来就按照上面这个方向进行改进好了(笑*
+~~什么时候我弄个auth_chain_c出来就按照上面这个方向进行改进好了(笑~~已经弄出来了
 
