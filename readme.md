@@ -1,4 +1,4 @@
-# ShadowsocksR C# 版本4.7.0 #
+# ShadowsocksR C# 版本4.8.0 #
 
 BitTorrent Sync：BHS55LP54SO7A434QBB5Z2O6B7A45B2BX  
 主页：[https://breakwa11.github.io/](https://breakwa11.github.io/)  
@@ -38,6 +38,9 @@ Google Group: [ShadowsocksR](https://groups.google.com/forum/#!forum/shadowsocks
 TOX: D211FF64C848E03161700E74714A2100D363757AED4982F35486CC0713577C2F356B7DD84CAB  
 
 ### 更新记录： ###
+版本4.8.0 *2017-08-08*  
+1.增加协议`auth_chain_c`、`auth_chain_d`，具体特性参见协议文档  
+
 版本4.7.0 *2017-07-27*  
 1.增加协议`auth_chain_b`，具体特性参见协议文档  
 2.修正部分内存泄露  
