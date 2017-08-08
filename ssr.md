@@ -85,9 +85,9 @@
 | auth_aes128_md5 |  0 |  80%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     10     |
 | auth_aes128_sha1 | 0 |  70%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     10     |
 | auth_chain_a   |  0  |  70%  |  75%/98%  |    Yes   |    Yes   |    Yes    |     15     |
-| auth_chain_b   |  0  |  69%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     20     |
-| auth_chain_c   |  0  |  71%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     20     |
-| auth_chain_d   |  0  |  75%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     20     |
+| auth_chain_b   |  0  |  68%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     20     |
+| auth_chain_c   |  0  |  69%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     20     |
+| auth_chain_d   |  0  |  70%  |  70%/98%  |    Yes   |    Yes   |    Yes    |     20     |
 
 说明：
 
