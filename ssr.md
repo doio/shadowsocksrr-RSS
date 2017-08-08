@@ -50,8 +50,6 @@
 
 推荐使用`auth_chain_*`系列插件，在以上插件里混淆能力较高，而抗检测能力最高，即使多人使用也难以识别封锁。同时如果要发布公开代理，以上auth插件均可严格限制使用客户端数（要注意的是若为`auth_sha1_v4_compatible`，那么用户只要使用原协议就没有限制效果），而`auth_chain_*`协议的限制最为精确。
 
-*注：当前（2017-08-08），`tls1.2_*`与`auth_chain_b/c/d`合用时libev客户端以及直接使用libev的Android客户端还存在未解决的BUG，会导致无法连接服务器。因此如果需要使用Android客户端或路由器的用户，可以暂时使用`http_*`系列与`auth_chain_b/c/d`合用合用，或`tls1.2_*`与`auth_chain_a`合用的方法避免这个BUG。*
-
 ## 混淆特性 ##
 | name                | RTT | encode speed | bandwidth | anti replay attack | cheat QoS | anti analysis |
 | ------------------- | :-: | -----------: | :-------: | :---------------: | :---: | -----------------: |
