@@ -9,7 +9,9 @@ Android APP: [SSR-android](https://github.com/shadowsocksr/shadowsocksr-android/
 iOS APP： [Shadowrocket](https://itunes.apple.com/us/app/shadowrocket/id932747118), [Potatso2](https://download.potatso.com), [Cross](https://itunes.apple.com/cn/app/cross-shadowsocks-proxy-client/id1194595243)  
 MAC APP：[ShadowsocksX-NG](https://github.com/qinyuhang/ShadowsocksX-NG/releases), [ShadowsocksX-R](https://github.com/yichengchen/ShadowsocksX-R/releases)  
 其它跨平台分支：[avege](https://github.com/avege/avege), [electron-ssr](https://github.com/erguotou520/electron-ssr)  
-Docker: [https://hub.docker.com/r/breakwa11/shadowsocksr/](https://hub.docker.com/r/breakwa11/shadowsocksr/)
+Docker: [https://hub.docker.com/r/breakwa11/shadowsocksr/](https://hub.docker.com/r/breakwa11/shadowsocksr/)  
+panel: [ssrpanel](https://github.com/ssrpanel/ssrpanel)  
+
 
 推荐使用ZeroNet地址，或BitTorrent Sync免翻自动更新，最及时自动获取最新版本  
 注意发布压缩包内有一个以sig后缀的签名文件（如果没有签名文件，即文件已经被修改过），**您应该使用GPG进行校验**  
